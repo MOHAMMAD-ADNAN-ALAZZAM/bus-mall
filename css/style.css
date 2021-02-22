@@ -1,3 +1,7 @@
+body {
+    background-color: thistle;
+}
+
 header {
     background-color: rgb(241, 243, 101);
     height: 80px;
@@ -19,27 +23,39 @@ header {
     background-color: wheat;
     margin: 0px;
     margin-top: 15px;
+    
     padding-top: 25px;
-    padding-left: 350px;
-    height: 250px;
+    padding-left: 400px;
+    height: 350px;
+
+}
+.ch {
+    /* background-color: wheat; */
+    position: relative;
+    bottom: 20px;
+
 
 }
 .ul {
     grid-area: sidebar;
-    background-color: wheat;
+    /* background-color: wheat; */
     margin: 0px;
     margin-top: 15px;
     padding-top: 25px;
+    position: relative;
+    bottom: 400px;
+    left: 100px;
     
 
 
 }
 
 footer {
-    background-color: yellow;
+    background-color: rgb(241, 243, 101);
     
     height: 80px;
     margin: 0px;
     margin-top: 15px;
     padding-top: 25px;
 }
+

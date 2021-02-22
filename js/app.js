@@ -7,7 +7,9 @@ let rightImag = document.getElementById('rightImag');
 let maximumClicks = 25;
 let attempts = 0;
 let arrOfobjects =[];
-
+let namesArry =[]; 
+let arryOfVotes = [];
+let arryShownCtr =[];
 function Busmall(name, imgURL){
     this.name = name;
     this.imgURL = imgURL;
@@ -16,6 +18,9 @@ function Busmall(name, imgURL){
 
     // Product.all.push(this);
     arrOfobjects.push(this);
+    namesArry.push(this.name);
+    arryShownCtr.push(this.shownCtr);
+
 
 
 
@@ -54,8 +59,28 @@ function Busmall(name, imgURL){
          leftImagIndex = generateRandomIndex();
          middleImagIndex = generateRandomIndex(); 
          rightImagIndex = generateRandomIndex();
+        // while(leftImagIndex === middleImagIndex && middleImagIndex === rightImagIndex && leftImagIndex === rightImagIndex ){
+        //     leftImagIndex = generateRandomIndex();
+        // }
         while(leftImagIndex === middleImagIndex && middleImagIndex === rightImagIndex && leftImagIndex === rightImagIndex ){
-            leftImagIndex = generateRandomIndex();
+            if(leftImagIndex === rightImagIndex){
+                leftImagIndex = generateRandomIndex();
+            }else if(middleImagIndex === rightImagIndex){
+                middleImagIndex = generateRandomIndex();  
+            }else if(rightImagIndex===middleImagIndex){
+                rightImagIndex = generateRandomIndex(); 
+
+            }else if (leftImagIndex === middleImagIndex ){
+                middleImagIndex = generateRandomIndex(); 
+            }else if(middleImagIndex === rightImagIndex){
+                rightImagIndex = generateRandomIndex();
+
+            }else if(leftImagIndex === middleImagIndex){
+                rightImagIndex = generateRandomIndex();
+                
+            }else{
+                break;
+            }
         }
 
         
@@ -63,8 +88,11 @@ function Busmall(name, imgURL){
           let middleImag = document.getElementById('middleImag');
           let rightImag = document.getElementById('rightImag');
           leftImag.setAttribute('src', arrOfobjects[leftImagIndex].imgURL);
+          arrOfobjects[leftImagIndex].shownCtr++ ;
           middleImag.setAttribute('src', arrOfobjects[middleImagIndex].imgURL);
+          arrOfobjects[middleImagIndex].shownCtr++;
           rightImag.setAttribute('src', arrOfobjects[rightImagIndex].imgURL);
+          arrOfobjects[rightImagIndex].shownCtr++;
           
 
     }
@@ -90,6 +118,8 @@ function Busmall(name, imgURL){
         if(attempts<=maximumClicks){
             if(event.target.id ==='leftImag'){
                 arrOfobjects[leftImagIndex].clickCtr++;
+                
+
                 // console.log(arrOfobjects[leftImagIndex].clickCtr);
             }else if(event.target.id ==='middleImag'){
                 arrOfobjects[middleImagIndex].clickCtr++;
@@ -101,18 +131,66 @@ function Busmall(name, imgURL){
             renderThreeRandomImages();
 
         }else{
-            let unList =document.getElementById('unOrderList');
-            let li;
-            for(let i=0 ;i<arrOfobjects.length ;i++){
-                li = document.createElement('li');
-                unList.appendChild(li);
-                li.textContent = `${arrOfobjects[i].name}  it has ${arrOfobjects[i].clickCtr}.`
-
-            }
             leftImag.removeEventListener('click',handleClicking);
             middleImag.removeEventListener('click',handleClicking);
             rightImag.removeEventListener('click',handleClicking);
+
+            let x = document.getElementById("myBtn");
+            let unList =document.getElementById('unOrderList');
+            unList.appendChild(x);
+            unList.addEventListener('click',ul);
+            let li;
+            function ul(){
+                for(let i=0 ;i<arrOfobjects.length ;i++){
+                    li = document.createElement('li');
+    
+                    unList.appendChild(li);
+    
+                    li.textContent = `${arrOfobjects[i].name}  it has ${arrOfobjects[i].clickCtr}it shownCtr ${arrOfobjects[i].shownCtr}.`
+    
+                }
+                unList.removeEventListener('click',ul);
+            }
+            
+            for(let j=0 ;j < arrOfobjects.length; j++){
+                arryOfVotes.push(arrOfobjects[j].clickCtr);
+                
+            }
+            chartRender();
+           
         
             
         }
     }
+
+
+    
+// for(let i =0; i<arrOfobjects.length;i++){
+//     namesArry.push(arrOfobjects[i].name);
+// }
+function chartRender(){
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: namesArry,
+        datasets: [{
+            label: 'votes', 
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: arryOfVotes,
+        },{ label: 'shownCtr', 
+        backgroundColor: 'rgb(333, 199, 222)',
+        borderColor: 'rgb(333, 199, 222)',
+        data: arryShownCtr,} ]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+
+}
