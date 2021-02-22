@@ -19,7 +19,7 @@ function Busmall(name, imgURL){
     // Product.all.push(this);
     arrOfobjects.push(this);
     namesArry.push(this.name);
-    arryShownCtr.push(this.shownCtr);
+    // arryShownCtr.push(this.shownCtr);
 
 
 
@@ -59,29 +59,44 @@ function Busmall(name, imgURL){
          leftImagIndex = generateRandomIndex();
          middleImagIndex = generateRandomIndex(); 
          rightImagIndex = generateRandomIndex();
+
+
+         while (middleImagIndex === leftImagIndex) {
+            middleImagIndex = generateRandomIndex();
+          }
+        
+          while (rightImagIndex === middleImagIndex || rightImagIndex === leftImagIndex) {
+            rightImgIndex = generateRandomIndex();
+          }
+
+
+
+
+
+
         // while(leftImagIndex === middleImagIndex && middleImagIndex === rightImagIndex && leftImagIndex === rightImagIndex ){
         //     leftImagIndex = generateRandomIndex();
         // }
-        while(leftImagIndex === middleImagIndex && middleImagIndex === rightImagIndex && leftImagIndex === rightImagIndex ){
-            if(leftImagIndex === rightImagIndex){
-                leftImagIndex = generateRandomIndex();
-            }else if(middleImagIndex === rightImagIndex){
-                middleImagIndex = generateRandomIndex();  
-            }else if(rightImagIndex===middleImagIndex){
-                rightImagIndex = generateRandomIndex(); 
+        // while(leftImagIndex === middleImagIndex && middleImagIndex === rightImagIndex && leftImagIndex === rightImagIndex ){
+        //     if(leftImagIndex === rightImagIndex){
+        //         leftImagIndex = generateRandomIndex();
+        //     }else if(middleImagIndex === rightImagIndex){
+        //         middleImagIndex = generateRandomIndex();  
+        //     }else if(rightImagIndex===middleImagIndex){
+        //         rightImagIndex = generateRandomIndex(); 
 
-            }else if (leftImagIndex === middleImagIndex ){
-                middleImagIndex = generateRandomIndex(); 
-            }else if(middleImagIndex === rightImagIndex){
-                rightImagIndex = generateRandomIndex();
+        //     }else if (leftImagIndex === middleImagIndex ){
+        //         middleImagIndex = generateRandomIndex(); 
+        //     }else if(middleImagIndex === rightImagIndex){
+        //         rightImagIndex = generateRandomIndex();
 
-            }else if(leftImagIndex === middleImagIndex){
-                rightImagIndex = generateRandomIndex();
+        //     }else if(leftImagIndex === middleImagIndex){
+        //         rightImagIndex = generateRandomIndex();
                 
-            }else{
-                break;
-            }
-        }
+        //     }else{
+        //         break;
+        //     }
+        // }
 
         
           let leftImag = document.getElementById('leftImag');
@@ -146,7 +161,7 @@ function Busmall(name, imgURL){
     
                     unList.appendChild(li);
     
-                    li.textContent = `${arrOfobjects[i].name}  it has ${arrOfobjects[i].clickCtr}it shownCtr ${arrOfobjects[i].shownCtr}.`
+                    li.textContent = `${arrOfobjects[i].name}  it has votes= ${arrOfobjects[i].clickCtr} it shown = ${arrOfobjects[i].shownCtr}.`
     
                 }
                 unList.removeEventListener('click',ul);
@@ -154,8 +169,10 @@ function Busmall(name, imgURL){
             
             for(let j=0 ;j < arrOfobjects.length; j++){
                 arryOfVotes.push(arrOfobjects[j].clickCtr);
+                arryShownCtr.push(arrOfobjects[j].shownCtr);
                 
             }
+
             chartRender();
            
         
