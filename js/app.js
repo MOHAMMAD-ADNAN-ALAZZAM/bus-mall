@@ -1,4 +1,7 @@
 'use strict';
+let leftImagIndex;
+let middleImagIndex;
+let rightImagIndex;
 
 let leftImag = document.getElementById('leftImag');
 let middleImag = document.getElementById('middleImag');
@@ -16,7 +19,7 @@ function Busmall(name, imgURL){
     this.clickCtr = 0;
     this.shownCtr = 0;
 
-    // Product.all.push(this);
+    
     arrOfobjects.push(this);
     namesArry.push(this.name);
     // arryShownCtr.push(this.shownCtr);
@@ -51,9 +54,25 @@ function Busmall(name, imgURL){
 
 
     //  console.log(arrOfobjects);
-    let leftImagIndex;
-    let middleImagIndex;
-    let rightImagIndex;
+   
+    let x = document.getElementById("myBtn");
+    let unList =document.getElementById('unOrderList');
+    // unList.appendChild(x);
+    x.addEventListener('click',ul);
+    let li;
+    function ul(){
+        for(let i=0 ;i<arrOfobjects.length ;i++){
+            li = document.createElement('li');
+
+            unList.appendChild(li);
+
+            li.textContent = `${arrOfobjects[i].name}  it has votes= ${arrOfobjects[i].clickCtr} it shown = ${arrOfobjects[i].shownCtr}.`
+
+        }
+        savedVotes();
+       x.removeEventListener('click',ul);
+    }
+
 
     function renderThreeRandomImages(){
          leftImagIndex = generateRandomIndex();
@@ -61,12 +80,17 @@ function Busmall(name, imgURL){
          rightImagIndex = generateRandomIndex();
 
 
-         while (middleImagIndex === leftImagIndex) {
+         while(middleImagIndex === leftImagIndex){
             middleImagIndex = generateRandomIndex();
           }
-        
-          while (rightImagIndex === middleImagIndex || rightImagIndex === leftImagIndex) {
-            rightImgIndex = generateRandomIndex();
+        //|| rightImagIndex === leftImagIndex//
+          while(rightImagIndex === middleImagIndex ){
+            rightImagIndex = generateRandomIndex();
+          }
+
+          while( leftImagIndex === rightImagIndex ){
+            leftImagIndex = generateRandomIndex();
+
           }
 
 
@@ -150,22 +174,7 @@ function Busmall(name, imgURL){
             middleImag.removeEventListener('click',handleClicking);
             rightImag.removeEventListener('click',handleClicking);
 
-            let x = document.getElementById("myBtn");
-            let unList =document.getElementById('unOrderList');
-            unList.appendChild(x);
-            unList.addEventListener('click',ul);
-            let li;
-            function ul(){
-                for(let i=0 ;i<arrOfobjects.length ;i++){
-                    li = document.createElement('li');
-    
-                    unList.appendChild(li);
-    
-                    li.textContent = `${arrOfobjects[i].name}  it has votes= ${arrOfobjects[i].clickCtr} it shown = ${arrOfobjects[i].shownCtr}.`
-    
-                }
-                unList.removeEventListener('click',ul);
-            }
+       
             
             for(let j=0 ;j < arrOfobjects.length; j++){
                 arryOfVotes.push(arrOfobjects[j].clickCtr);
@@ -211,3 +220,17 @@ function chartRender(){
 });
 
 }
+
+function savedVotes(){
+    let vote = JSON.stringify(arrOfobjects);
+    localStorage.setItem('votes', vote);
+  }
+  
+  function getvotes(){
+    let gvotes = localStorage.getItem('votes');
+    let votee = JSON.parse(gvotes);
+    if(votee){ 
+      arrOfobjects = votee;
+    }
+}
+    getvotes();

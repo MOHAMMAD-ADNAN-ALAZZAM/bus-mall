@@ -1,3 +1,5 @@
+/* font-family: 'Stick', sans-serif; */
+
 body {
     background-color: thistle;
 }
@@ -5,7 +7,7 @@ body {
 header {
     background-color: rgb(241, 243, 101);
     height: 80px;
-    margin: 0px;
+    
     margin-top: 15px;
     padding-top: 25px;
     text-align: center;
@@ -21,7 +23,7 @@ header {
 
 .img {
     background-color: wheat;
-    margin: 0px;
+    
     margin-top: 15px;
     
     padding-top: 25px;
@@ -39,7 +41,7 @@ header {
 .ul {
     grid-area: sidebar;
     /* background-color: wheat; */
-    margin: 0px;
+    
     margin-top: 15px;
     padding-top: 25px;
     position: relative;
@@ -50,12 +52,52 @@ header {
 
 }
 
+.button {
+    background-color: yellowgreen;
+    
+    height: 40px;
+    position: relative;
+    bottom: 370px;
+    left: 100px;
+    
+}
+
 footer {
     background-color: rgb(241, 243, 101);
     
     height: 80px;
-    margin: 0px;
+    
     margin-top: 15px;
     padding-top: 25px;
 }
+.mo {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    bottom:20px;
+    right: 560px;
+    
+}
+.bu {
+    font-family: 'Stick', sans-serif;
+    font-size: 50px;
+    color: rgb(141, 21, 0);
+    position: relative;
+    bottom: 90px;
+}
+.i1 {
+    
+    position: relative;
+    padding: 8px;
 
+}
+.i2 {position: relative;
+    padding: 8px;
+    
+
+}
+.i3 {
+    position: relative;
+    padding: 8px;
+    
+}
