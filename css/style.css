@@ -25,7 +25,8 @@ header {
     background-color: wheat;
     
     margin-top: 15px;
-    
+    position: relative;
+    top: 30px;
     padding-top: 25px;
     padding-left: 400px;
     height: 350px;
@@ -41,24 +42,28 @@ header {
 .ul {
     grid-area: sidebar;
     /* background-color: wheat; */
-    
+    width: 400px;
     margin-top: 15px;
     padding-top: 25px;
     position: relative;
     bottom: 400px;
-    left: 100px;
+    left: 110px;
     
 
 
 }
+#unOrderList {
+    width: 270px;
+    border: 7px double rgba(40, 6, 151, 0.86);
+}
 
 .button {
     background-color: yellowgreen;
-    
+    border: 7px double rgba(40, 6, 151, 0.86);
     height: 40px;
     position: relative;
-    bottom: 370px;
-    left: 100px;
+    bottom: 320px;
+    left: 5px;
     
 }
 
@@ -86,17 +91,20 @@ footer {
     bottom: 90px;
 }
 .i1 {
-    
+    border: 7px double rgba(40, 6, 151, 0.86);
     position: relative;
     padding: 8px;
 
 }
-.i2 {position: relative;
+.i2 {
+    border: 7px double rgba(40, 6, 151, 0.86);
+    position: relative;
     padding: 8px;
     
 
 }
 .i3 {
+    border: 7px double rgba(40, 6, 151, 0.86);
     position: relative;
     padding: 8px;
     
